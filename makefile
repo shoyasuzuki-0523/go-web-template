@@ -32,14 +32,14 @@ migrate-create-ddl:
 
 .PHONY: migrate-create-seed
 migrate-create-seed:
-	docker run --rm -v `pwd`/common/migrations/seed/local:/migrations --network=host migrate/migrate -path=/migrations/ -database ${DB_URL} create --ext sql --dir migrations $(NAME)
+	docker run --rm -v `pwd`/common/migrations/seeds/local:/migrations --network=host migrate/migrate -path=/migrations/ -database ${DB_URL} create --ext sql --dir migrations $(NAME)
 
 .PHONY: migrate-up
 migrate-up:
 	docker run --rm -v `pwd`/common/migrations/ddl:/migrations --network=host migrate/migrate -path=/migrations/ -database "${DB_URL}&x-migrations-table=ddl_migrations" up
-	# docker run --rm -v `pwd`/common/migrations/seed/local:/migrations --network=host migrate/migrate -path=/migrations/ -database "${DB_URL}&x-migrations-table=seed_migrations" up
+	# docker run --rm -v `pwd`/common/migrations/seeds/local:/migrations --network=host migrate/migrate -path=/migrations/ -database "${DB_URL}&x-migrations-table=seed_migrations" up
 
 .PHONY: migrate-down
 migrate-down:
 	docker run --rm -v `pwd`/common/migrations/ddl:/migrations --network=host migrate/migrate -path=/migrations/ -database "${DB_URL}&x-migrations-table=ddl_migrations" down -all
-	# docker run --rm -v `pwd`/common/migrations/seed/local:/migrations --network=host migrate/migrate -path=/migrations/ -database "${DB_URL}&x-migrations-table=seed_migrations" down -all
+	# docker run --rm -v `pwd`/common/migrations/seeds/local:/migrations --network=host migrate/migrate -path=/migrations/ -database "${DB_URL}&x-migrations-table=seed_migrations" down -all
