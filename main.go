@@ -1,14 +1,13 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"kakeru-pro-web/common/config"
+	"kakeru-pro-web/common/db"
+	"kakeru-pro-web/common/router"
+)
 
 func main() {
-	r := gin.Default()
-	r.LoadHTMLGlob("templates/*.html")
-
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "index.html", gin.H{})
-	})
-
-	r.Run()
+	config.Init()
+	db := db.Init()
+	router.Init(db)
 }
