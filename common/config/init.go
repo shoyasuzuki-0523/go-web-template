@@ -7,11 +7,9 @@ import (
 )
 
 type ConfigType struct {
-	PORT           int
-	DB_DSN         string
-	FRONT_URL      string
-	AUTH0_DOMAIN   string
-	AUTH0_AUDIENCE string
+	PORT      int
+	DB_DSN    string
+	FRONT_URL string
 }
 
 var Config ConfigType

@@ -2,6 +2,7 @@ package router
 
 import (
 	"kakeru-pro-web/common/config"
+	"kakeru-pro-web/controller"
 	"strconv"
 
 	"github.com/gin-contrib/cors"
@@ -15,9 +16,8 @@ func Init(db *gorm.DB) {
 
 	r.Use(corsConfig())
 
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "index.html", gin.H{})
-	})
+	c := controller.NewGreetController(db)
+	r.GET("/", c.HelloWorld)
 
 	r.Run(":" + strconv.Itoa(config.Config.PORT))
 }
